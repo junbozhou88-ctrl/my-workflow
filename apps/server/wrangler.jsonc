@@ -1,0 +1,24 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "my-workflow-lambda-server",
+  "main": "src/index.ts",
+  "compatibility_date": "2025-06-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "observability": {
+    "enabled": true
+  },
+  "dev": {
+    "port": 3000
+  },
+  "vars": {
+    "CORS_ORIGIN": "https://my-workflow-lambda-web.pages.dev"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "tickets-db",
+      "database_id": "53445a0f-5088-44fe-adef-c5ed437d28a7",
+      "migrations_dir": "drizzle"
+    }
+  ]
+}

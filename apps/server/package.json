@@ -3,24 +3,26 @@
   "type": "module",
   "main": "src/index.ts",
   "scripts": {
-    "build": "tsdown",
-    "check-types": "tsc -b",
-    "compile": "bun build --compile --minify --sourcemap --bytecode ./src/index.ts --outfile server",
-    "dev": "tsx watch src/index.ts",
-    "start": "node dist/index.mjs"
+    "build": "wrangler deploy --dry-run --outdir dist",
+    "check-types": "tsc --noEmit",
+    "deploy": "wrangler deploy",
+    "dev": "wrangler dev",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate:local": "wrangler d1 migrations apply tickets-db --local",
+    "db:migrate:remote": "wrangler d1 migrations apply tickets-db --remote"
   },
   "dependencies": {
-    "@hono/node-server": "^1.14.4",
-    "@my-workflow-lambda/env": "workspace:*",
-    "dotenv": "catalog:",
+    "@hono/zod-validator": "^0.8.0",
+    "drizzle-orm": "^0.44.4",
     "hono": "^4.8.2",
     "zod": "catalog:"
   },
   "devDependencies": {
+    "@cloudflare/workers-types": "^4.20260616.1",
     "@my-workflow-lambda/config": "workspace:*",
     "@types/node": "catalog:",
-    "tsdown": "^0.21.9",
-    "tsx": "^4.19.2",
-    "typescript": "catalog:"
+    "drizzle-kit": "^0.31.10",
+    "typescript": "catalog:",
+    "wrangler": "^4.100.0"
   }
 }

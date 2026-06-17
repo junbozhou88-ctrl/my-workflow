@@ -124,3 +124,50 @@ Biome's linter will catch most issues automatically. Focus your attention on:
 ---
 
 Most formatting and common issues are automatically fixed by Biome. Run `pnpm dlx ultracite fix` before committing to ensure compliance.
+
+---
+
+# 项目概览：my-workflow-lambda
+
+基于 Better-T-Stack 的 pnpm + Turborepo monorepo，包含 Web 应用、Hono API 服务与文档站。
+
+## 技术栈
+
+- 语言: TypeScript（全仓库 ESM）
+- 框架: React 19 + TanStack Router + Vite（web）、Hono on Cloudflare Workers（server）、Next.js + fumadocs（docs）
+- 数据库: Cloudflare D1 + Drizzle ORM（server）
+- 样式 / UI: Tailwind v4、shadcn + @base-ui/react（packages/ui）
+- 校验 / 环境: zod、@t3-oss/env-core（packages/env）
+- 构建编排: Turborepo｜包管理: pnpm 11｜Lint/Format: Biome（Ultracite preset）
+
+## 常用命令
+
+- 安装依赖: `pnpm install`
+- 全量开发: `pnpm dev`（或 `pnpm dev:web` / `pnpm dev:server`）
+- 构建: `pnpm build`
+- 类型检查: `pnpm check-types`
+- Lint/格式检查: `pnpm check`｜自动修复: `pnpm fix`
+- D1 本地迁移: `pnpm -F server exec wrangler d1 migrations apply tickets-db --local`
+
+## 目录结构
+
+```text
+apps/
+├── web/        # React 19 + TanStack Router + Vite 前端
+├── server/     # Hono API 服务（:3000）
+└── fumadocs/   # Next.js + fumadocs 文档站（:4000）
+packages/
+├── ui/         # 共享组件库（shadcn + base-ui）
+├── env/        # 类型安全环境变量（@t3-oss/env-core + zod）
+└── config/     # 共享 tsconfig
+docs/           # 需求文档（PRD）
+```
+
+## 规则
+
+@rules/coding-style.md
+@rules/testing.md
+@rules/security.md
+@rules/git-workflow.md
+@rules/frontend.md
+@rules/backend-api.md
